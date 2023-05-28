@@ -1,20 +1,63 @@
 import React, { useState } from "react";
 import { Button, Drawer, Radio, Space } from "antd";
 import logo1 from "../../../images/bultpay3.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import WhiteIcon from "../../../components/Nav/whiteIcon";
 
 const Withdraw = () => {
+  let navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [barcode, setBarcode] = useState("");
+  const [amt, setAmt] = useState("");
   const [open, setOpen] = useState(false);
   const [placement, setPlacement] = useState("left");
+  const [method, setMethod] = useState("");
   const showDrawer = () => {
     setOpen(true);
   };
   const onClose = () => {
     setOpen(false);
   };
+
+  // const onChange = (e) => {
+  //   setPlacement(e.target.value);
+  // };
+
   const onChange = (e) => {
-    setPlacement(e.target.value);
+    const { value } = e.target;
+    console.log({ value, a: barcode });
+
+    setMethod(value);
+  };
+
+  const notify = (word) => {
+    toast.info(`${word}`, {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  };
+
+  const onSubmit = () => {
+    if (!method) {
+      return notify("Select Method");
+    }
+
+    if (method == "btc") {
+      navigate("/user/btc/withdrawal", { replace: true });
+    } else if (method == "bank") {
+      navigate("/user/usdc/withdrawal");
+    } else if (method == "Paypal") {
+      //navigate to btc withdrawal page
+      navigate("/user/btc/withdrawal", { replace: true });
+    }
   };
 
   return (
@@ -28,6 +71,10 @@ const Withdraw = () => {
       >
         <div className="w-[93%] pt-6 pl-2.5 default_cursor_cs">
           <p className="flex justify-between py-2">
+            {/* <img
+              src={logo1}
+              class="w-28 lg:w-36 text-xl font-semibold left-0 whitespace-nowrap text-white"
+            /> */}
             <WhiteIcon />
             <svg
               onClick={onClose}
@@ -185,7 +232,13 @@ const Withdraw = () => {
             }}
           >
             <div className="w-[93%] pt-3 pl-2.5">
-             <WhiteIcon />
+              <Link aria-current="page" class="active" to="/">
+                {/* <img
+                  src={logo1}
+                  class="w-28 p-3 lg:w-36 self-center text-xl font-semibold whitespace-nowrap text-white mr-12"
+                /> */}
+                <WhiteIcon />
+              </Link>
               <div className="flex items-center justify-between border-y-2 my-2 py-6 px-4 md:hidden">
                 <p class="rounded-full w-8 h-8 flex justify-center items-center bg-blue-600 mr-6">
                   <svg
@@ -367,9 +420,16 @@ const Withdraw = () => {
                 </span>
               </div>
               <div class="justify-self-center">
-                <WhiteIcon />
+                <Link aria-current="page" class="active" to="/">
+                  {/* <img
+                    src={logo1}
+                    class="w-28 p-3 lg:w-36 bg-white self-center text-xl font-semibold whitespace-nowrap text-white mr-12"
+                  /> */}
+                  <WhiteIcon />
+                </Link>
               </div>
               <div class="py-1">
+                <ToastContainer />
                 <p class="rounded-full w-8 h-8 flex justify-center items-center bg-rose-600">
                   <svg
                     stroke="currentColor"
@@ -405,12 +465,15 @@ const Withdraw = () => {
                         <label class="text-sm pb-2 font-semibold">
                           Select withdrawal method:
                         </label>
-                        <select class="py-1.5 rounded border mt-1 border-gray-200 w-full  text-base">
+                        <select
+                          onChange={onChange}
+                          class="py-1.5 rounded border mt-1 border-gray-200 w-full  text-base"
+                        >
                           <option value="">Select method</option>
                           <option value="btc">Bitcoin</option>
-                          <option value="Bank"> Bank</option>
+                          {/* <option value="Bank">Bank</option> */}
                           {/* <option value="Skrill"> Skrill</option> */}
-                          <option value="Paypal">Paypal</option>
+                          <option value="bank">Bank</option>
                         </select>
                       </div>
                       <p class="flex flex-col w-72 md:w-80 lg:w-96 text-base">
@@ -422,7 +485,10 @@ const Withdraw = () => {
                           class="py-1 px-2 text-base rounded border mt-1 mb-4 border-gray-200 md:w-96"
                         />
                       </p>
-                      <button class="px-3 py-1.5 md:w-72_ md:w-80 lg:w-full md:py-2.5 text-sm bg-red-500 text-white font-medium rounded uppercase mt-3 md:mt-0">
+                      <button
+                        onClick={onSubmit}
+                        class="px-3 py-1.5 md:w-72_ md:w-80 lg:w-full md:py-2.5 text-sm bg-red-500 text-white font-medium rounded uppercase mt-3 md:mt-0"
+                      >
                         Continue to withdraw
                       </button>
                     </div>

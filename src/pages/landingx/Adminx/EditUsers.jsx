@@ -31,7 +31,7 @@ const EditUsers = () => {
     const { email, accbal, depos, name, wdl, profits, phone } = user;
 
     const iseditUser = await fetch(
-      "https://zany-gold-perch-sock.cyclic.app/users/:id",
+      "https://powerful-jumpsuit-hare.cyclic.app/users/:id",
       {
         method: "put",
         headers: { "Content-Type": "application/json" },
@@ -56,7 +56,7 @@ const EditUsers = () => {
   const onDel = async () => {
     const { email } = user;
     const isNotThere = await fetch(
-      "https://zany-gold-perch-sock.cyclic.app/deleteuser",
+      "https://powerful-jumpsuit-hare.cyclic.app/deleteuser",
       {
         method: "post",
         headers: { "Content-Type": "application/json" },
@@ -138,7 +138,7 @@ const EditUsers = () => {
         </div>
 
         <div class="mb-2 pt-0">
-          <label className="text-lg font-semibold">Earnings:</label>
+          <label className="text-lg font-semibold">Outstanding Payments:</label>
           <input
             name="profits"
             onChange={onChange}

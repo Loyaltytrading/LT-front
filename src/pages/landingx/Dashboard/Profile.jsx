@@ -56,7 +56,7 @@ const Profile = () => {
     const { email, name, btc, phone } = user;
 
     const iseditUser = await fetch(
-      "https://zany-gold-perch-sock.cyclic.app/users/:id",
+      "https://powerful-jumpsuit-hare.cyclic.app/users/:id",
       {
         method: "put",
         headers: { "Content-Type": "application/json" },

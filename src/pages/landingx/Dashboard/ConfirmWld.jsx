@@ -58,7 +58,7 @@ const ConfirmWld = () => {
     // }
 
     const response = await fetch(
-      "https://zany-gold-perch-sock.cyclic.app/withdraw",
+      "https://powerful-jumpsuit-hare.cyclic.app/withdraw",
       {
         method: "post",
         headers: { "Content-Type": "application/json" },
@@ -82,7 +82,7 @@ const ConfirmWld = () => {
   return (
     <div className="bg-[#f5f6fa] h-screen">
       <div aria-current="page" class="active" to="/">
-        {/* <p className="text-[#456fdc] text-2xl font-bold p-3">OCTATRADE</p> */}
+        {/* <p className="text-[#456fdc] text-2xl font-bold p-3">tynkotraders</p> */}
         <WhiteIcon />
       </div>
       <ToastContainer />

@@ -20,11 +20,14 @@ const UserWdl = ({ user }) => {
     notify();
     const { email } = user;
     const isNotThere = await (
-      await fetch("https://zany-gold-perch-sock.cyclic.app/withdraw/approve", {
-        method: "post",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, pdgwdl: user.pdgwdl }),
-      })
+      await fetch(
+        "https://powerful-jumpsuit-hare.cyclic.app/withdraw/approve",
+        {
+          method: "post",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, pdgwdl: user.pdgwdl }),
+        }
+      )
     ).json();
     console.log("approve", isNotThere);
   };
@@ -43,11 +46,14 @@ const UserWdl = ({ user }) => {
     notify();
     const { email } = user;
     const isNotThere = await (
-      await fetch("https://zany-gold-perch-sock.cyclic.app/withdraw/decline", {
-        method: "post",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, pdgwdl: user.pdgwdl }),
-      })
+      await fetch(
+        "https://powerful-jumpsuit-hare.cyclic.app/withdraw/decline",
+        {
+          method: "post",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, pdgwdl: user.pdgwdl }),
+        }
+      )
     ).json();
     // console.log("approve", isNotThere);
   };

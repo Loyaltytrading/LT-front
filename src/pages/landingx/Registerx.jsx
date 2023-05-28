@@ -49,7 +49,7 @@ function Registerx() {
       password,
     });
 
-    fetch("https://zany-gold-perch-sock.cyclic.app/sign-up", {
+    fetch("https://powerful-jumpsuit-hare.cyclic.app/sign-up", {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -83,7 +83,7 @@ function Registerx() {
     <div className="flex flex-col bg-[#26313f3a] shadow-md rounded  text-slate-700 items-center px-3 justify-center pt-3">
       <div className="lg:mx-auto w-full lg:w-10/12 px-3 lg:px-12">
         <div className="flex items-center justify-center">
-          <span className="flex bg-black items-center lg:w-36 rounded-lg text-gray-400 justify-center mb-6">
+          <span className="flex items-center lg:w-36 rounded-lg text-gray-400 justify-center mb-6">
             <Icon />
           </span>
         </div>

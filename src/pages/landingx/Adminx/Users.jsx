@@ -18,7 +18,7 @@ const Users = ({ user, notify }) => {
   const onDel = async () => {
     const { email } = user;
     const isNotThere = await fetch(
-      "https://zany-gold-perch-sock.cyclic.app/users",
+      "https://powerful-jumpsuit-hare.cyclic.app/users",
       {
         method: "post",
         headers: { "Content-Type": "application/json" },

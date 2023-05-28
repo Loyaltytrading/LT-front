@@ -9,13 +9,15 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Icon from "../../../components/Nav/Icon";
 import WhiteIcon from "../../../components/Nav/whiteIcon";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 
 
 const Deposit = () => {
   const dispatch = useDispatch();
   let navigate = useNavigate();
- 
-  const [barcode, setBarcode] = useState("");
+
+  const [barcode, setBarcode] = useState("btc");
+  const [code, setCode] = useState("3CQ9bc6kuGTVth7SFknwDV8vKj582wBTZ8");
   const [amt, setAmt] = useState("");
   const [open, setOpen] = useState(false);
   const [placement, setPlacement] = useState("left");
@@ -28,25 +30,29 @@ const Deposit = () => {
   const onChange = (e) => {
     setPlacement(e.target.value);
   };
-  
+
   const onAmtChange = (e) => {
     setAmt(e.target.value);
-  }; 
+  };
 
   const onCoinChange = (e) => {
     const { value } = e.target;
-    console.log({ value, a: barcode });
+    console.log({ value, a: code });
 
     if (value == "btc") {
       setBarcode("btc");
+      setCode("36hVS7jB7QNTgmNmn7jEFy26aFZ8HyRf7v");
     } else if (value == "eth") {
       setBarcode("eth");
-    } else if (value == "usdc") {
-      setBarcode("usdc");
+      setCode("0xA0BC374b09F7d01D8A8D8B8d58118884a0c8d871");
+    } else if (value == "usdt") {
+      setBarcode("usdt");
+      setCode("0xe17157dC21E4BA9840F5FdF472bF63f4eCd4b5E4");
     } else if (value == "bank") {
       showBank();
     }
   };
+  const notifier = () => toast("Copied!");
 
   const user = useSelector((state) => state.auth.user_details);
 
@@ -64,46 +70,46 @@ const Deposit = () => {
     });
   };
 
-   useEffect(() => {
-     const controller = new AbortController();
-     const signal = controller.signal;
-     fetch("https://zany-gold-perch-sock.cyclic.app/deposit", {
+  useEffect(() => {
+    const controller = new AbortController();
+    const signal = controller.signal;
+    fetch("https://powerful-jumpsuit-hare.cyclic.app/deposit", {
       signal: signal,
-     })
-       .then((response) => response.json())
+    }).then((response) => response.json());
 
-     return () => controller.abort();
-   }, []);
+    return () => controller.abort();
+  }, []);
 
-   const onDeposit = async () => {
-     if (!amt) {
-       return notify("Please provide an amount");
-     }
+  const onDeposit = async () => {
+    if (!amt) {
+      return notify("Please provide an amount");
+    }
 
-     const res = await fetch(
-       "https://zany-gold-perch-sock.cyclic.app/deposit",
-       {
-         method: "POST",
-         headers: { "Content-Type": "application/json" },
-         body: JSON.stringify({ email,  deposit: amt }),
-       }
-     );
+    const res = await fetch("https://zany-gold-perch-sock.cyclic.app/deposit", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, deposit: amt }),
+    });
 
-     const result = await res.json();
+    const result = await res.json();
 
-     notify(`${result.msg}`);
-   };
+    notify(`${result.msg}`);
+  };
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const showModal = () => {
-    setIsModalOpen(true);
+    if (!amt) {
+      return notify("Enter Amount");
+    } else {
+      setIsModalOpen(true);
+    }
   };
   const handleOk = () => {
     setIsModalOpen(false);
   };
   const handleCancel = () => {
     setIsModalOpen(false);
-  }; 
+  };
   const [openBank, setOpenBank] = useState(false);
   const showBank = () => {
     setOpenBank(true);
@@ -126,7 +132,11 @@ const Deposit = () => {
       >
         <div className="w-[93%] pt-6 pl-2.5 default_cursor_cs">
           <p className="flex justify-between py-2">
-            <WhiteIcon />
+            {/* <img
+              src={bultpay}
+              class="w-28 lg:w-36 text-xl font-semibold left-0 whitespace-nowrap text-white"
+            /> */}
+            <WhiteIcon/>
             <svg
               onClick={onClose}
               stroke="currentColor"
@@ -308,7 +318,13 @@ const Deposit = () => {
             }}
           >
             <div className="w-[93%] pt-3 pl-2.5">
-              <WhiteIcon />
+              <Link aria-current="page" class="active" to="/">
+                {/* <img
+                  src={bultpay}
+                  class="w-28 p-3 lg:w-36 self-center text-xl font-semibold whitespace-nowrap text-white mr-12"
+                /> */}
+                <WhiteIcon/>
+              </Link>
               <div className="flex items-center justify-between border-y-2 my-2 py-6 px-4 md:hidden">
                 <p class="rounded-full w-8 h-8 flex justify-center items-center bg-blue-600 mr-6">
                   <svg
@@ -516,7 +532,13 @@ const Deposit = () => {
                 </span>
               </div>
               <div class="justify-self-center">
-                <WhiteIcon />
+                <Link aria-current="page" class="active" to="/">
+                  {/* <img
+                    src={bultpay}
+                    class="w-28 p-3 lg:w-36 bg-white self-center text-xl font-semibold whitespace-nowrap text-white mr-12"
+                  /> */}
+                  <WhiteIcon/>
+                </Link>
               </div>
               <div class="py-1">
                 <p class="rounded-full w-8 h-8 flex justify-center items-center bg-rose-600">
@@ -580,9 +602,9 @@ const Deposit = () => {
                   class="py-1.5 rounded w-72 md:w-80 font-normal mb-4 border mt-1 border-gray-200  text-base"
                 >
                   <option value="btc">Bitcoin</option>
-                  <option value="eth">Ethereum</option>
-                  <option value="bank">Bank</option>
-                  <option value="usdc">USDC</option>
+                  {/* <option value="eth">Ethereum</option> */}
+                  {/* <option value="bank">Bank</option> */}
+                  <option value="usdt">USDT</option>
                 </select>
                 <p class="flex flex-col w-72 md:w-80 lg:w-96 text-base mb-3">
                   <span class="text-sm pb-2 font-normal">Description</span>
@@ -628,20 +650,25 @@ const Deposit = () => {
                         </span>
                       </div>
                       <div class="flex justify-between items-center border-b py-2 border-slate-300 text-sm default_cursor_cs">
-                        <span class="flex text-sm">3782bCuU88...</span>
-                        <svg
-                          stroke="currentColor"
-                          fill="currentColor"
-                          stroke-width="0"
-                          viewBox="0 0 24 24"
-                          class="mt-1 ml-4 text-green-500 hover:text-green-600 bg-pr default_cursor_cs"
-                          height="20"
-                          width="20"
-                          xmlns="http://www.w3.org/2000/svg"
+                        <span class="flex text-sm">{code.slice(0, 6)}...</span>
+                        <CopyToClipboard
+                          text={code}
+                          onCopy={() => notify("copied")}
                         >
-                          <path d="M20 2H10c-1.103 0-2 .897-2 2v4H4c-1.103 0-2 .897-2 2v10c0 1.103.897 2 2 2h10c1.103 0 2-.897 2-2v-4h4c1.103 0 2-.897 2-2V4c0-1.103-.897-2-2-2zM4 20V10h10l.002 10H4zm16-6h-4v-4c0-1.103-.897-2-2-2h-4V4h10v10z"></path>
-                          <path d="M6 12h6v2H6zm0 4h6v2H6z"></path>
-                        </svg>
+                          <svg
+                            stroke="currentColor"
+                            fill="currentColor"
+                            stroke-width="0"
+                            viewBox="0 0 24 24"
+                            class="mt-1 ml-4 text-green-500 hover:text-green-600 bg-pr default_cursor_cs"
+                            height="20"
+                            width="20"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path d="M20 2H10c-1.103 0-2 .897-2 2v4H4c-1.103 0-2 .897-2 2v10c0 1.103.897 2 2 2h10c1.103 0 2-.897 2-2v-4h4c1.103 0 2-.897 2-2V4c0-1.103-.897-2-2-2zM4 20V10h10l.002 10H4zm16-6h-4v-4c0-1.103-.897-2-2-2h-4V4h10v10z"></path>
+                            <path d="M6 12h6v2H6zm0 4h6v2H6z"></path>
+                          </svg>
+                        </CopyToClipboard>
                       </div>
                       <div class="flex justify-between items-center border-b py-2 border-slate-300 text-sm default_cursor_cs">
                         <span>You will send</span>
@@ -673,7 +700,7 @@ const Deposit = () => {
                         You selected Bank deposit method
                       </p>
                     </div>
-                    <div>Please visit ...bultpay.com</div>
+                    <div>Please visit ...b</div>
                   </div>
                 </Modal>
               </div>
@@ -686,3 +713,4 @@ const Deposit = () => {
 };
 
 export default Deposit;
+

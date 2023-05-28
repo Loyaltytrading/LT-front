@@ -25,6 +25,17 @@ import Widget from "./Widget";
 const Homex = () => {
   return (
     <div className="App">
+      <div
+          className="flex bg-transparent"
+          id="google_translate_element"
+          style={{
+            color: "white",
+            backgroundColor: "black",
+            position: "relative",
+            marginBottom: "0px",
+            zIndex: "9999",
+          }}
+        ></div>
       <section
         id="nav_and_hero"
         className="h-screen lg:px-24 overflow-x-hidden overflow-y-hidden bg-black bg-no-repeat bg-cover bg-left-[50%] bg-right-[50%] bg-top-[0] bg-bottom[0]"
@@ -32,6 +43,7 @@ const Homex = () => {
           backgroundImage: "url(/octabg.svg)",
         }}
       >
+        
         <Nav />
         <section className="overflow-y-hidden">
           <div className="px-4 py-12 sm:px-6 md:px-6 lg:py-24">
@@ -187,9 +199,9 @@ const Homex = () => {
             </div>
           </div> */}
         </section>
-        <div className="absolute bottom-0 left-0 z-10 w-full">
+        {/* <div className="absolute bottom-0 left-0 z-10 w-full">
           <Widget />
-        </div>
+        </div> */}
       </section>
 
       <section className="bg-[#101112] text-white md:px-24 lg:px-36 default_cursor_cs">
@@ -366,9 +378,9 @@ const Homex = () => {
           <div className="mt-4">
             <img src={btc} alt="btc" className="mx-auto default_cursor_cs" />
             <div className="text-center font-bold py-2 default_cursor_cs" />
-            bitcoin.com
+            Bitcoin.com
           </div>
-          <div className="mt-4">
+          <div className="mt-4 w-[10rem]">
             <img src={crypto} alt="cry" className="mx-auto default_cursor_cs" />
             <div className="text-center font-bold py-2">Crypto.com</div>
           </div>
@@ -382,7 +394,6 @@ const Homex = () => {
         <div className="flex flex-col md:flex-row items-center justify-between px-4">
           <img src={btc1} alt="btc1" className="w-28 md:48" />
           <img src={mscard} alt="mscard" className="w-28 md:48 my-4" />
-          <img src={visa} alt="visa" className="w-28 md:48" />
           <img src={skrill} alt="skrill" className="w-28 md:48 my-4" />
           <img src={paypal} alt="paypal" className="w-28 md:48" />
           <img src={neteller} alt="neteller" className="w-28 md:48 my-4" />

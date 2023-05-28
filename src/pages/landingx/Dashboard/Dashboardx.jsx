@@ -14,22 +14,22 @@ const Dashboardx = () => {
   const dispatch = useDispatch();
   let navigate = useNavigate();
 
-  const { email } = useSelector((state) => state.auth.user_details);
-  const [user, setUser] = useState({
-    balance: 0,
-    btc: "",
-    deposit: 0,
-    email: "",
-    name: "",
-    phone: "",
-    profits: 0,
-    role: "user",
-    withdrawal: 0,
-  });
+  const user = useSelector((state) => state.auth.user_details);
+  // const [user, setUser] = useState({
+  //   balance: 0,
+  //   btc: "",
+  //   deposit: 0,
+  //   email: "",
+  //   name: "",
+//   phone: "",
+  //   profits: 0,
+  //   role: "user",
+  //   withdrawal: 0,
+  // });
   //console.log({user});
 
   // useEffect(() => {
-  //   fetch("https://zany-gold-perch-sock.cyclic.app/get-profile", {
+  //   fetch("https://powerful-jumpsuit-hare.cyclic.app/get-profile", {
   //     method: "post",
   //     headers: { "Content-Type": "application/json" },
   //     body: JSON.stringify({
@@ -460,7 +460,7 @@ const Dashboardx = () => {
                 </span>
               </div>
               <div class="justify-self-center">
-               <WhiteIcon/>
+                <WhiteIcon />
               </div>
               <div class="py-1">
                 <p class="rounded-full w-8 h-8 flex justify-center items-center bg-rose-600">
@@ -585,7 +585,7 @@ const Dashboardx = () => {
                 </div>
                 <div class="py-6 px-3 shadow-lg my-5 mx-5 border border-gray-300 border-b-4 border-b-sky-800 md:w-1/3">
                   <p class="flex justify-between items-center">
-                    <span>Earnings</span>
+                    <span>Outstanding Payments</span>
                     <svg
                       stroke="currentColor"
                       fill="currentColor"

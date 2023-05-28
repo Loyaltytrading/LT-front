@@ -72,7 +72,7 @@ const Footer = () => {
             <div className="xl:grid xl:grid-cols-3 xl:gap-8 default_cursor_cs">
               <div className="space-y-8 xl:col-span-1">
                 <span className="flex items-center w-28 lg:w-36 rounded-md text-secondary justify-center mb-6">
-                 <Icon/>
+                  <Icon />
                 </span>
                 <p className="w-1/2 mt-2 text-sm text-whtie">
                   We have licenses provide to services Worldwide.
@@ -212,6 +212,18 @@ const Footer = () => {
               </div>
             </div>
           </div>
+          {/* <div
+            className="lg:ml-28"
+            id="google_translate_element"
+            style={{
+              color: "white",
+              backgroundColor: "#191b1c",
+              position: "relative",
+              marginBottom: "0px",
+              zIndex: "9999",
+              width: "18%",
+            }}
+          ></div> */}
           <div className="px-5 py-12 mx-auto max-w-7xl sm:px-6 md:flex md:items-center md:justify-between lg:px-20 default_cursor_cs">
             <div className="mt-8 md:mt-0 md:order-1 text-center">
               <span className="mt-2 text-sm font-light text-white">
@@ -221,7 +233,7 @@ const Footer = () => {
                   className="mx-2 text-blue-500 hover:text-white"
                   rel="noopener noreferrer"
                 >
-                  Octatrade.net
+                  loyaltytrading.org
                 </Link>
                 . Since 2014
               </span>
